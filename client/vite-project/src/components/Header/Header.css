@@ -2,9 +2,13 @@
   height: 34vw;
   margin: 30px auto;
   background: url("/header_img.png") no-repeat;
-  background-size: contain;
+  background-size: cover;
+  border-radius: 15px;
+  overflow: hidden;
+
   position: relative;
 }
+
 .header-contents {
   position: absolute;
   display: flex;
@@ -19,21 +23,21 @@
 
 .header-contents h2 {
   font-weight: 500;
-  color: rgb(240, 5, 5);
+  color: rgb(240, 14, 14);
   font-size: max(4.5vw, 22px);
 }
 
 .header-contents p {
-  color: rgb(252, 5, 5);
+  color: rgb(186, 9, 9);
   font-size: 1vw;
 }
 
 .header-contents button {
   border: none;
-  color: #747474;
+  color: #e3dde6;
   font-weight: 500;
   padding: 1vw 2.3vw;
-  background-color: white;
+  background-color: rgb(248, 41, 41);
   font-size: max(1vw, 13px);
   border-radius: 50px;
 }

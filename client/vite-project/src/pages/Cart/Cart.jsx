@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import "./Cart.css";
+import { useNavigate } from "react-router-dom";
 
 const Order = () => {
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount } =
+  const { cartItems, food_list, removeFromCart, getTotalCartAmount, url } =
     useContext(StoreContext);
   const deliver_fee = 5;
+  const navigate = useNavigate();
 
   return (
     <div className="cart">
@@ -22,10 +24,11 @@ const Order = () => {
         <hr />
         {food_list.map((item, index) => {
           if (cartItems[item._id] > 0) {
+            console.log(item);
             return (
               <div key={index}>
                 <div className="cart-items-title cart-items-item">
-                  <img src={item.image} alt="" />
+                  <img src={url + "/images/" + item.image} alt="" />
                   <p>{item.name}</p>
                   <p>₦{item.price}</p>
                   <p>{cartItems[item._id]}</p>
@@ -44,21 +47,22 @@ const Order = () => {
             );
           }
         })}
-        <form action="">
-          <div className="instruction-box">
-            <p className="instruction">Your Message:</p>
-            <p>
-              {" "}
-              <textarea
-                className="instruction"
-                name=""
-                id=""
-                placeholder="For additional instructions. Please comment here"
-              ></textarea>
-            </p>
-          </div>
-        </form>
       </div>
+      {/* <form action="">
+        <div className="instruction-box">
+          <p className="instruction">Your Message:</p>
+          <p>
+            {" "}
+            <textarea
+              className="instruction"
+              name=""
+              id=""
+              placeholder="For additional instructions. Please comment here"
+            ></textarea>
+          </p>
+        </div>
+      </form> */}
+
       <div className="cart-bottom">
         <div className="cart-total">
           <h2>Cart Total</h2>

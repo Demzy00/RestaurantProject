@@ -4,6 +4,7 @@ import { Routes } from "react-router-dom";
 import ExploreMenu from "../../components/ExploreMenu/ExploreMenu";
 import FoodDisplay from "../../components/FoodDisplay/FoodDisplay";
 import Footer from "../../components/Footer/Footer";
+import AppDownload from "../../components/AppDownload/AppDownload";
 
 const Home = () => {
   const [category, setCategory] = useState("All");
@@ -13,6 +14,7 @@ const Home = () => {
       <Header />
       <ExploreMenu category={category} setCategory={setCategory} />
       <FoodDisplay category={category} />
+      <AppDownload />
     </div>
   );
 };

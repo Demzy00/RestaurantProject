@@ -50,7 +50,7 @@ const NavBar = () => {
         </Link>
 
         <Link
-          to="/carts"
+          to="/cart"
           className={`${getC("cart")} ${isAct("carts")}`}
           onClick={() => setMenu("carts")}
         >
