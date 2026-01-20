@@ -32,7 +32,10 @@ const NavBar = () => {
 
   return (
     <div className="navbar">
-      <p>LOGO WILL BE HERE</p>{" "}
+      <Link to="/" onClick={() => (to = "/")}>
+        <img alt="" /> <p>LOGO WILL BE HERE</p>{" "}
+      </Link>
+
       <ul className="navbar-menu">
         <Link
           to="/"
@@ -56,13 +59,13 @@ const NavBar = () => {
         >
           Carts
         </Link>
-        <a
+        {/* <a
           href="#contact-us"
           className={`${isAct("contact-us")}`}
           onClick={() => setMenu("contact-us")}
         >
           Contact Us
-        </a>
+        </a> */}
       </ul>
     </div>
   );

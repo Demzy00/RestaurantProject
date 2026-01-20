@@ -1,4 +1,4 @@
-const Food = require("../models/food.model.js");
+const Food = require("../models/food.model");
 const fs = require("fs");
 
 const addFood = async (req, res) => {

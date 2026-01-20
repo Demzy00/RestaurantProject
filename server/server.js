@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
 const foodRouter = require("./routes/food.route.js");
+const foodCategoryRouter = require("./routes/food.category.js");
 
 dotenv.config();
 
@@ -29,8 +30,10 @@ app.use(
 );
 
 app.use("/images", express.static("uploads"));
+app.use("/images", express.static("upload"));
 
 app.use("/api/food", foodRouter);
+app.use("/api/foodCategory", foodCategoryRouter);
 
 app.listen(port, () => {
   console.log(`listening to port ${port}`);

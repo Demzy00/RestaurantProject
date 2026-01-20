@@ -48,7 +48,7 @@ const Order = () => {
           }
         })}
       </div>
-      {/* <form action="">
+      <form action="">
         <div className="instruction-box">
           <p className="instruction">Your Message:</p>
           <p>
@@ -61,7 +61,7 @@ const Order = () => {
             ></textarea>
           </p>
         </div>
-      </form> */}
+      </form>
 
       <div className="cart-bottom">
         <div className="cart-total">

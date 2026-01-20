@@ -10,7 +10,7 @@ import MyOrders from "./pages/MyOrders/MyOrders";
 const App = () => {
   return (
     <div>
-      <NavBar />
+      <NavBar className="nav" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
