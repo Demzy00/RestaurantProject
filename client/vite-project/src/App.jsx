@@ -6,13 +6,15 @@ import Footer from "./components/Footer/Footer";
 import Cart from "./pages/Cart/Cart";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import MyOrders from "./pages/MyOrders/MyOrders";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 const App = () => {
   return (
     <div>
-      <NavBar className="nav" />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/landing" element={<LandingPage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<PlaceOrder />} />
         <Route path="/myorders" element={<MyOrders />} />

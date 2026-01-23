@@ -30,7 +30,8 @@ const Add = ({ url }) => {
     console.log(formData);
     const response = await axios.post(`${url}/api/food/add`, formData);
     console.log(response.data);
-    if (response.data.success === "true") {
+    console.log(response.data.success);
+    if (response.data.success === true) {
       setData({
         name: "",
         description: "",
@@ -38,7 +39,6 @@ const Add = ({ url }) => {
         category: "Rice",
       });
       setImage(false);
-      console.log(response.data);
       toast.success(response.data.message);
     } else {
       toast.error(response.data.message);
@@ -74,6 +74,7 @@ const Add = ({ url }) => {
           <p>Product name</p>
           <input
             onChange={onChangeHandler}
+            value={data.name}
             type="text"
             name="name"
             placeholder="Type here"
@@ -108,7 +109,7 @@ const Add = ({ url }) => {
               value={data.price}
               type="Number"
               name="price"
-              placeholder="$20"
+              placeholder="₦20"
             />
           </div>
         </div>

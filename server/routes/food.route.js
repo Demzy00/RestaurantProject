@@ -9,6 +9,7 @@ const {
 } = require("../controllers/food.controller");
 
 const multer = require("multer");
+const { default: authMiddleware } = require("../middleware/auth");
 
 const foodRouter = express.Router();
 
@@ -24,7 +25,7 @@ const upload = multer({ storage: storage });
 
 // routes
 foodRouter.post("/add", upload.single("image"), addFood);
-foodRouter.get("/list", listFood);
+foodRouter.get("/list", authMiddleware,  listFood);
 foodRouter.get("/:id", getFoodById);
 foodRouter.patch("/:id", updateFood);
 foodRouter.delete("/:id", deleteFood);

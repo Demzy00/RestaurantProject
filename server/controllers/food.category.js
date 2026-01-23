@@ -35,7 +35,7 @@ const addFoodCategory = async (res, req) => {
 const listCategory = async (req, res) => {
   try {
     const foodCategory = await Food.find();
-    res.status(200).json({ success: true, data: foodCategory });
+    return res.status(200).json({ success: true, data: foodCategory });
   } catch (error) {
     console.error("Error getting all food category:", error);
     res.status(500).json({ error: "Internal server error" });

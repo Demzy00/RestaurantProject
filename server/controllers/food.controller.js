@@ -3,7 +3,19 @@ const fs = require("fs");
 
 const addFood = async (req, res) => {
   try {
+    const { userId } = req.body;
+    console.log(`User ID from auth middleware: ${userId}`);
+
+    // Find the user by ID
+    // const user = await User.findById(userId);
+    // if (!user) {
+    //   return res.status(404).json({ error: "User not found" });
+    // }          
+
+    
+
     const { name, description, price, category } = req.body;
+    console.log(req.body);
 
     // Validate input
     if (!name || !description || !price || !category) {

@@ -33,7 +33,7 @@ const NavBar = () => {
   return (
     <div className="navbar">
       <Link to="/" onClick={() => (to = "/")}>
-        <img alt="" /> <p>LOGO WILL BE HERE</p>{" "}
+        <img alt="" /> <p>CLIENT LOGO WILL BE HERE</p>{" "}
       </Link>
 
       <ul className="navbar-menu">
@@ -44,20 +44,13 @@ const NavBar = () => {
         >
           Home
         </Link>
-        <Link
-          to="/#explore-menu"
-          className={`${isAct("menu")}`}
-          onClick={() => setMenu("menu")}
-        >
-          Menu
-        </Link>
 
         <Link
           to="/cart"
           className={`${getC("cart")} ${isAct("carts")}`}
           onClick={() => setMenu("carts")}
         >
-          Carts
+          Orders
         </Link>
         {/* <a
           href="#contact-us"
