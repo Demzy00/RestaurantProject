@@ -2,37 +2,46 @@ import { useNavigate } from "react-router-dom";
 import React, { use, useContext } from "react";
 import { assets } from "../../assets/assets";
 
-import "./ResRegPage.css";
+import "./RegRegister.css";
 import { useState } from "react";
+import axios from "axios";
 
-const ResRegPage = () => {
+const ResRegister = ({ url }) => {
   const navigate = useNavigate();
   const [image, setImage] = useState(false);
+  const adminUrl = "http://localhost:5174";
+  const [data, setData] = useState({
+    name: "",
+    address: "",
+    number: "",
+  });
+
+  const onChangeHandler = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setData((data) => ({ ...data, [name]: value }));
+  };
 
   const onLogin = async (event) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("address", data.address);
+    formData.append("number", data.number);
+    // formData.append("restaurantLogo", image);
 
-    navigate(fronetendUrl);
-
-    // const name = event.target.name.value;
-    // const address = event.target.address.value;
-    // const number = event.target.number.value;
-    // const imageLogo = event.target.imageLogo.value;
-    // const category = event.target.category.value;
-
-    // const response = await axios.post(newUrl, data);
-    // console.log(response);
-    // // if (response.data.success === false) {
-    //   alert(response.data.message);
-    // } else {
-    //   console.log("in here");
-    //   console.log(response.data);
-    //   setToken(response.data);
-    //   localStorage.setItem("token", response.data);
-    //   setShowLogin(false);
-    //   navigate("/")
-    // }
+    console.log(formData);
+    const response = await axios.post(`${url}/api/restaurant/add`, formData);
+    console.log(response.data);
+    console.log(response.data.success);
+    if (response.data.success === true) {
+      navigate(adminUrl);
+      toast.success(response.data.message);
+    } else {
+      toast.error(response.data.message);
+    }
   };
+
   return (
     <div className="add">
       <form onSubmit={onLogin} className="flex-col">
@@ -42,6 +51,8 @@ const ResRegPage = () => {
         <div className="add-name-input flex-col">
           <p>Name of Restaurant</p>
           <input
+            onChange={onChangeHandler}
+            value={data.name}
             name="name"
             type="name"
             placeholder="Your restaurant name"
@@ -51,6 +62,8 @@ const ResRegPage = () => {
         <div className="add-name-input flex-col">
           <p>Address</p>
           <input
+            onChange={onChangeHandler}
+            value={data.address}
             name="address"
             type="text"
             placeholder="Restaurant address"
@@ -60,13 +73,14 @@ const ResRegPage = () => {
         <div className="add-name-input flex-col">
           <p>Phone Number</p>
           <input
+            onChange={onChangeHandler}
+            value={data.number}
             name="number"
             type="number"
             placeholder="Phone Number"
             required
           />
         </div>
-
         {/* <div className="add-name-input flex-col">
           <p>Category</p>
           <input
@@ -76,21 +90,19 @@ const ResRegPage = () => {
             required
           />
         </div> */}
-        <div className="add-img-upload flex-col">
-          <p>Upload Restaurant Logo</p>
-          <label htmlFor="image">
-            <img
-              src={image ? URL.createObjectURL(image) : assets.upload_area}
-              alt=""
-            />
-          </label>
-          {/* <input
+        {/* <div className="add-img-upload flex-col"> */}
+        {/* <p>Upload Restaurant Logo</p> */}
+        {/* <label htmlFor="image"> */}
+        {/* <img */}
+        // src={image ? URL.createObjectURL(image) : assets.upload_area}
+        // alt="" // /{/* </label> */}
+        {/* <input
             name="imageLogo"
             type="file"
             placeholder="Upload Restaurant Logo"
             required
           /> */}
-        </div>
+        {/* </div> */}
         <button type="submit" className="add-btn">
           Proceed
         </button>
@@ -99,4 +111,4 @@ const ResRegPage = () => {
   );
 };
 
-export default ResRegPage;
+export default ResRegister;

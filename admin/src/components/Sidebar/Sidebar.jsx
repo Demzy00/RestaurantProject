@@ -6,13 +6,17 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-options">
-        <NavLink to="/" className="sidebar-option">
-          <img src={assets.add_icon} alt="" />
+        <NavLink to="/res" className="sidebar-option">
+          <img src={assets.order_icon} alt="" />
           <p>Add items</p>
+        </NavLink>
+        <NavLink to="/addcategory" className="sidebar-option">
+          <img src={assets.add_icon} alt="" />
+          <p>Add categories</p>
         </NavLink>
         <NavLink to="/add" className="sidebar-option">
           <img src={assets.add_icon} alt="" />
-          <p>Add items</p>
+          <p>Add food items</p>
         </NavLink>
         <NavLink to="/list" className="sidebar-option">
           <img src={assets.order_icon} alt="" />

@@ -1,5 +1,7 @@
 .food-display {
   margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .food-display h2 {
@@ -13,4 +15,24 @@
   gap: 30px;
   row-gap: 50px;
 }
+.floating-button {
+  position: fixed;
+  bottom: 20px; /* Distance from bottom */
+  right: 20px; /* Distance from right */
+  z-index: 1000; /* Ensures it stays on top of other content */
+  /* Optional styling */
+  padding: 15px 25px;
+  background-color: #f18374;
+  color: rgb(214, 56, 56);
+  border-radius: 50px;
+  text-decoration: none;
+}
 
+.dot {
+  /* position: absolute; */
+  /* /* min-width: 10px; */
+  min-height: 1px;
+  border-radius: 5px;
+  top: 2px;
+  right: 1px;
+}

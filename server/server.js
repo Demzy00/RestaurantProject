@@ -6,6 +6,7 @@ const app = express();
 import foodRouter from "./routes/food.route.js";
 import foodCategoryRouter from "./routes/food.category.js";
 import userRouter from "./routes/user.route.js";
+import restaurantRouter from "./routes/restaurant.route.js";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use("/images", express.static("upload"));
 app.use("/api/food", foodRouter);
 app.use("/api/foodCategory", foodCategoryRouter);
 app.use("/api/user", userRouter);
+app.use("/api/restaurant", restaurantRouter);
 
 app.listen(port, () => {
   console.log(`listening to port ${port}`);

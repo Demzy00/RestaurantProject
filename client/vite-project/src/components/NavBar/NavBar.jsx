@@ -11,9 +11,9 @@ const NavBar = () => {
   const { getTotalCartAmount } = useContext(StoreContext);
 
   // get the dot style for classname
-  const getC = () => {
-    return getTotalCartAmount() === 0 ? "" : "dot";
-  };
+  // const getC = () => {
+  //   return getTotalCartAmount() === 0 ? "" : "dot";
+  // };
 
   // get the active style
   const isAct = (name) => {
@@ -33,7 +33,7 @@ const NavBar = () => {
   return (
     <div className="navbar">
       <Link to="/" onClick={() => (to = "/")}>
-        <img alt="" /> <p>CLIENT LOGO WILL BE HERE</p>{" "}
+        <img alt="" /> <p>CLIENT LOGO</p>{" "}
       </Link>
 
       <ul className="navbar-menu">
@@ -45,13 +45,13 @@ const NavBar = () => {
           Home
         </Link>
 
-        <Link
-          to="/cart"
-          className={`${getC("cart")} ${isAct("carts")}`}
+        {/* <Link
+          to="/orders"
+          className={`${isAct("carts")}`}
           onClick={() => setMenu("carts")}
         >
           Orders
-        </Link>
+        </Link> */}
         {/* <a
           href="#contact-us"
           className={`${isAct("contact-us")}`}

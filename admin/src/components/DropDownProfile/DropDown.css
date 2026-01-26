@@ -1,0 +1,22 @@
+.dropdown-profile {
+    list-style: none;
+  position: absolute;
+  top: 4.5rem;
+  right: 1.5rem;
+  width: 120px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid #d3d3d3;
+}
+
+.dropdown-profile::before {
+  content: "";
+  position: absolute;
+  top: -2rem;
+  right: 1.1rem;
+  width: 20px;
+  height: 20px;
+  padding: 15px;
+  transform: rotate(45deg);
+}

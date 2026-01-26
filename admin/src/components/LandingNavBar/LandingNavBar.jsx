@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import "./NavBar.css";
+import "./LandingNavBar.css";
 import { assets } from "../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
+import Footer from "../Footer/Footer";
 
-const NavBar = ({ setShowLogin }) => {
-
+const LandingNavBar = ({ setShowLogin }) => {
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
 
   const navigate = useNavigate();
@@ -34,8 +34,9 @@ const NavBar = ({ setShowLogin }) => {
           </div>
         )}
       </div>
+    {/* <Footer/> */}
     </div>
   );
 };
 
-export default NavBar;
+export default LandingNavBar;

@@ -42,14 +42,14 @@ const LoginPopUp = ({ setShowLogin }) => {
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
       setShowLogin(false);
-      navigate(`${fronetendUrl}/register-restaurant`);
+      navigate(`/register-restaurant`);
     }
     if (response.data.message === "Login successful") {
       console.log("in here");
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
       setShowLogin(false);
-      navigate(`${fronetendUrl}`);
+      navigate(`/res`);
     }
   };
 

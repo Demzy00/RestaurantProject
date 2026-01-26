@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const restaurantSchema = new mongoose.Schema(
   {
@@ -8,22 +8,13 @@ const restaurantSchema = new mongoose.Schema(
     },
     address: {
       type: String,
+      required: [true, "Restaurant address is required"],
     },
-    phone: {
+    number: {
       type: String,
-      required: [true, "Phone number is required"],
+      required: [true, "Restaurant contact number is required"],
     },
-    restaurantLogo: {
-      type: String,
-      required: [true, "Image is required"],
-    },
-    food: {
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "food" }],
-      default: [],
-    },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   },
-
   { timestamps: true },
 );
 
