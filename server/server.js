@@ -4,8 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 const app = express();
 import foodRouter from "./routes/food.route.js";
-import foodCategoryRouter from "./routes/food.category.js";
 import userRouter from "./routes/user.route.js";
+import foodCategoryRouter from "./routes/food.category.js";
 import restaurantRouter from "./routes/restaurant.route.js";
 
 dotenv.config();
@@ -35,7 +35,7 @@ app.use("/images", express.static("uploads"));
 app.use("/images", express.static("upload"));
 
 app.use("/api/food", foodRouter);
-app.use("/api/foodCategory", foodCategoryRouter);
+app.use("/api/category", foodCategoryRouter);
 app.use("/api/user", userRouter);
 app.use("/api/restaurant", restaurantRouter);
 

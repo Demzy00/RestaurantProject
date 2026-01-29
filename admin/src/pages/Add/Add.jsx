@@ -10,7 +10,7 @@ const Add = ({ url }) => {
     name: "",
     description: "",
     price: "",
-    category: "Sandwich",
+    category: "",
   });
 
   const onChangeHandler = (event) => {
@@ -117,6 +117,10 @@ const Add = ({ url }) => {
           Add
         </button>
       </form>
+      <br />
+      <br />
+      <br />
+      <button >Save changes</button>
     </div>
   );
 };

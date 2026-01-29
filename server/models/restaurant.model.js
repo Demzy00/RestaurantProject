@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+
+
 const restaurantSchema = new mongoose.Schema(
   {
     name: {
@@ -13,6 +15,16 @@ const restaurantSchema = new mongoose.Schema(
     number: {
       type: String,
       required: [true, "Restaurant contact number is required"],
+    },
+    // image: {
+    //   type: String,
+    // },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+
+    food: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Food",
     },
   },
   { timestamps: true },

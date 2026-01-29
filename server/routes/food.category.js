@@ -1,30 +1,17 @@
 const express = require("express");
 
+const { default: authMiddleware } = require("../middleware/auth");
 const {
-  addFoodCategory,
+  addCategory,
   listCategory,
-  updateFoodCategory,
-  deleteFoodCategory,
-} = require("../controllers/food.category");
-
-const multer = require("multer");
+  deleteCategory,
+} = require("../controllers/food.category.controller");
 
 const foodCategoryRouter = express.Router();
 
-// Image Storage Engine
-const storage = multer.diskStorage({
-  destination: "upload",
-  filename: (req, file, cb) => {
-    return cb(null, `${Date.now()}${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage: storage });
-
 // routes
-foodCategoryRouter.post("/add", upload.single("image"), addFoodCategory);
-foodCategoryRouter.get("/list", listCategory);
-foodCategoryRouter.patch("/:id", updateFoodCategory);
-foodCategoryRouter.delete("/:id", deleteFoodCategory);
+foodCategoryRouter.post("/:id", authMiddleware, addCategory);
+foodCategoryRouter.get("/:id", authMiddleware, listCategory);
+foodCategoryRouter.delete("/:id", authMiddleware, deleteCategory);
 
 module.exports = foodCategoryRouter;

@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const LoginPopUp = ({ setShowLogin }) => {
-  const { url, setToken, fronetendUrl } = useContext(StoreContext);
+  const { url, token, fronetendUrl, setToken } = useContext(StoreContext);
 
   const [currState, setCurrState] = useState("Login");
   const [data, setData] = useState({
@@ -32,24 +32,35 @@ const LoginPopUp = ({ setShowLogin }) => {
       newUrl += "/api/user/register";
     }
 
+    console.log(newUrl);
+    console.log(data);
+
     const response = await axios.post(newUrl, data);
     console.log(response);
+    console.log("look up");
     if (response.data.success === false) {
       alert(response.data.message);
     }
     if (response.data.message === "Registered successful") {
       console.log("in Register here");
+      console.log(response.data.token)
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
+      axios.defaults.headers.common["Authorization"] =
+        `Bearer ${response.data.token}`;
       setShowLogin(false);
       navigate(`/register-restaurant`);
     }
     if (response.data.message === "Login successful") {
       console.log("in here");
+      console.log(response.data.token);
       setToken(response.data.token);
+      console.log("end");
       localStorage.setItem("token", response.data.token);
+      axios.defaults.headers.common["Authorization"] =
+        `Bearer ${response.data.token}`;
       setShowLogin(false);
-      navigate(`/res`);
+      navigate(`/profile`);
     }
   };
 

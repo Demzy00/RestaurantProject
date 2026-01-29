@@ -11,6 +11,7 @@ const LandingPage = () => {
   return (
     <div className="landingpage">
       {showLogin ? <LoginPopUp setShowLogin={setShowLogin} /> : <></>}
+
       <LandingNavBar setShowLogin={setShowLogin} />
 
       <h1>Landing Page</h1>

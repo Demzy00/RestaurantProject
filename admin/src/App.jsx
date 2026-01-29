@@ -28,14 +28,14 @@ const App = () => {
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/res" element={<ResPage />} />
+          <Route path="/profile" element={<ResPage />} />
           <Route
             path="/register-restaurant"
             element={<ResRegister url={url} />}
           />
           <Route path="/addcategory" element={<AddCategory url={url} />} />
 
-          <Route path="/add" element={<Add url={url} />} />
+          <Route path="/addproduct" element={<Add url={url} />} />
           <Route path="/list" element={<List url={url} />} />
           <Route path="/orders" element={<Order url={url} />} />
         </Routes>

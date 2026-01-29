@@ -14,7 +14,7 @@ const Sidebar = () => {
           <img src={assets.add_icon} alt="" />
           <p>Add categories</p>
         </NavLink>
-        <NavLink to="/add" className="sidebar-option">
+        <NavLink to="/addproduct" className="sidebar-option">
           <img src={assets.add_icon} alt="" />
           <p>Add food items</p>
         </NavLink>

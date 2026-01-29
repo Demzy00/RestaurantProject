@@ -65,16 +65,16 @@ const Order = () => {
 
       <div className="cart-bottom">
         <div className="cart-total">
-          <h2>Cart Total</h2>
+          <h2>Order Total</h2>
           <div>
-            <div className="cart-total-details">
+            {/* <div className="cart-total-details">
               <p>Subtotal</p>
               <p>₦{getTotalCartAmount()}</p>
-            </div>
-            <div className="cart-total-details">
+            </div> */}
+            {/* <div className="cart-total-details">
               <p>Delivery Fee</p>
               <p>₦{deliver_fee}</p>
-            </div>
+            </div> */}
             <div className="cart-total-details">
               <b>Total</b>
               <b>
@@ -90,7 +90,7 @@ const Order = () => {
               navigate("/order");
             }}
           >
-            PROCEED TO CHECK OUT
+            PROCEED TO PLACE ORDER
           </button>
         </div>
         <div className="cart-promocode">

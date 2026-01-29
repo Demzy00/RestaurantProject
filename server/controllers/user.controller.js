@@ -1,10 +1,12 @@
 import userModel from "../models/user.model.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import validator from "validator";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+
+dotenv.config();
 
 // login user
-
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -20,9 +22,24 @@ const loginUser = async (req, res) => {
       return res.json({ success: false, message: "Invalid credentials" });
     }
 
-    const token = await createToken(user._id);
+    // const token = await createToken(user._id);
+    // console.log(token);
+    console.log("first");
+    console.log(user._id);
+    console.log(user.email);
+
+    const token = jwt.sign(
+      { _id: user._id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" },
+    );
+    console.log(token);
+    // res.cookie(token, process.env.JWT_SECRET, { httpOnly: true });
+    // res.cookie("token", token, { httpOnly: true });
+    // console.log(res.
+    console.log("end of controller");
     // console.log({ success: true, message: "Login successfully" });
-    res.json({ success: true, token, message: "Login successful" });
+    return res.json({ success: true, token, message: "Login successful" });
   } catch (error) {
     console.log(error);
     return res.json({ success: false, message: "Error" });

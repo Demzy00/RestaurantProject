@@ -1,38 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import React, { use, useContext } from "react";
 import { assets } from "../../assets/assets";
+import axios from "axios";
 
 import "./ResPage.css";
 import { useState } from "react";
+import { useEffect } from "react";
+import { StoreContext } from "../../context/StoreContext";
 
 const ResPage = () => {
   const navigate = useNavigate();
   const [image, setImage] = useState(false);
+  const url = "http://localhost:5050/api/restaurant/get";
 
-  const onLogin = async (event) => {
-    event.preventDefault();
+  const { info } = useContext(StoreContext);
 
-    navigate(fronetendUrl);
+  console.log(info);
 
-    // const name = event.target.name.value;
-    // const address = event.target.address.value;
-    // const number = event.target.number.value;
-    // const imageLogo = event.target.imageLogo.value;
-    // const category = event.target.category.value;
-
-    // const response = await axios.post(newUrl, data);
-    // console.log(response);
-    // // if (response.data.success === false) {
-    //   alert(response.data.message);
-    // } else {
-    //   console.log("in here");
-    //   console.log(response.data);
-    //   setToken(response.data);
-    //   localStorage.setItem("token", response.data);
-    //   setShowLogin(false);
-    //   navigate("/")
-    // }
-  };
   return (
     <div className="add">
       <div className="">
@@ -42,7 +26,7 @@ const ResPage = () => {
         <hr />
         <br />
         <p>Name of Restaurant</p>
-        <p>THE USER RESTAURANT INPUT</p>
+        <p>`${url}`</p>
         <br />
       </div>
       <div className="add-name-input flex-col">
@@ -55,21 +39,21 @@ const ResPage = () => {
         <p>THE RESTAURANT PHONE NUMBER</p>
         <br />
       </div>
-      <div className="add-img-upload flex-col">
-        <p>The QR CODE</p>
-        <label htmlFor="image">
-          <img
+      {/* <div className="add-img-upload flex-col"> */}
+        {/* <p>The QR CODE</p> */}
+        {/* <label htmlFor="image"> */}
+          {/* <img
             src={image ? URL.createObjectURL(image) : assets.upload_area}
             alt=""
-          />
-        </label>
+          /> */}
+        {/* </label> */}
         {/* <input
             name="imageLogo"
             type="file"
             placeholder="Upload Restaurant Logo"
             required
           /> */}
-      </div>
+      {/* </div> */}
     </div>
   );
 };

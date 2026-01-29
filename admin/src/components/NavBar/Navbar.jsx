@@ -14,7 +14,7 @@ const NavBar = () => {
         onClick={() => console.log("clicked")}
         alt=""
       />
-      {/* <DropDown className="profile" /> */}
+      <DropDown className="profile" />
     </div>
   );
 };

@@ -42,6 +42,8 @@ import fs from "fs";
 
 const addRestaurant = async (req, res) => {
   try {
+    console.log("in restaurant");
+    const { id } = req.params;
     const { name, address, number } = req.body;
     console.log(req.body);
 
@@ -55,6 +57,7 @@ const addRestaurant = async (req, res) => {
       name: name,
       address: address,
       number: number,
+      userId: id,
     });
 
     // Save the restaurant to the database
@@ -69,8 +72,12 @@ const addRestaurant = async (req, res) => {
 
 const getRestaurant = async (req, res) => {
   try {
-    const restaurants = await Restaurant.find(req.body.userId);
-    res.status(200).json(restaurants);
+    console.log("in get controller");
+    console.log(req);
+    // console.log(req);
+    const { id } = req.params;
+    const restaurant = await Restaurant.find({ id });
+    res.status(200).json(restaurant);
   } catch (error) {
     console.error("Error fetching restaurants:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -97,7 +104,7 @@ const updateRestaurant = async (req, res) => {
 const deleteRestaurant = async (req, res) => {
   try {
     const { id } = req.params;
-    const restaurant = await Restaurant.findById(id);
+    const restaurant = await Restaurant.findById({ id });
     console.log("got here");
     console.log(restaurant);
     fs.unlink(`${restaurant.restaurantLogo}`, () => {});

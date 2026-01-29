@@ -3,16 +3,16 @@ const fs = require("fs");
 
 const addFood = async (req, res) => {
   try {
-    const { userId } = req.body;
-    console.log(`User ID from auth middleware: ${userId}`);
+    // const { userId } = req.body;
+    // console.log(`User ID from auth middleware: ${userId}`);
 
     // Find the user by ID
     // const user = await User.findById(userId);
     // if (!user) {
     //   return res.status(404).json({ error: "User not found" });
-    // }          
+    // }
 
-    
+    const { id } = req.params;
 
     const { name, description, price, category } = req.body;
     console.log(req.body);
@@ -37,6 +37,7 @@ const addFood = async (req, res) => {
       price,
       category,
       image: imagePath,
+      userId: id,
     });
 
     // Save the product to the database
@@ -51,7 +52,8 @@ const addFood = async (req, res) => {
 
 const listFood = async (req, res) => {
   try {
-    const foods = await Food.find();
+    const { id } = req.params;
+    const foods = await Food.find({ userId: id });
     res.status(200).json({ success: true, data: foods });
   } catch (error) {
     console.error("Error getting all foods:", error);
@@ -73,7 +75,7 @@ const getFoodById = async (req, res) => {
 const updateFood = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedFood = await Food.findByIdAndUpdate(id, req.body, {
+    const updatedFood = await Food.findByIdAndUpdate({ userId: id }, req.body, {
       new: true,
       runValidators: true,
     });
@@ -90,7 +92,7 @@ const updateFood = async (req, res) => {
 const deleteFood = async (req, res) => {
   try {
     const { id } = req.params;
-    const food = await Food.findById(id);
+    const food = await Food.findById({ userId: id });
     console.log("got here");
     console.log(food);
     fs.unlink(`${food.image}`, () => {});

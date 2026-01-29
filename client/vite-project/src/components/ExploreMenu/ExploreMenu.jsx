@@ -4,8 +4,8 @@ import { menu_list } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 
 const ExploreMenu = ({ category, setCategory }) => {
-  const { food_categories } = useContext(StoreContext);
-  console.log(food_categories);
+  // const { food_categories } = useContext(StoreContext);
+  // console.log(food_categories);
 
   return (
     <div className="explore-menu" id="explore-menu">
@@ -15,12 +15,13 @@ const ExploreMenu = ({ category, setCategory }) => {
         mission is to feed all people in the world
       </p>
       <div className="explore-menu-list">
-        {food_categories.map((item, index) => {
+        {menu_list.map((item, index) => {
+          console.log(item);
           return (
             <div
               onClick={() => {
                 setCategory((prev) =>
-                  prev === item.menu_name ? "All" : item.name
+                  prev === item.menu_name ? "All" : item.menu_image.name,
                 );
               }}
               key={index}
@@ -28,11 +29,12 @@ const ExploreMenu = ({ category, setCategory }) => {
             >
               {console.log(category)}
               <img
-                className={category === item.name ? "active" : ""}
-                src={item.image}
+                className={category === item.menu_image ? "active" : ""}
+                src={item.menu_image}
                 alt=""
               />
-              <p>{item.name}</p>
+              <p> {item.menu_name}</p>
+              {/* <p className="each"> {item.menu_name}</p> */}
             </div>
           );
         })}

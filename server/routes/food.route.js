@@ -24,10 +24,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // routes
-foodRouter.post("/add", upload.single("image"), addFood);
-foodRouter.get("/list", listFood);
-foodRouter.get("/:id", getFoodById);
-foodRouter.patch("/:id", updateFood);
-foodRouter.delete("/:id", deleteFood);
+foodRouter.post("/:id", upload.single("image"),authMiddleware, addFood);
+foodRouter.get("/:id",authMiddleware, listFood);
+foodRouter.get("/:id",authMiddleware, getFoodById);
+foodRouter.patch("/:id",authMiddleware, updateFood);
+foodRouter.delete("/:id",authMiddleware, deleteFood);
 
 module.exports = foodRouter;

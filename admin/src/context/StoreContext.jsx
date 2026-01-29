@@ -9,10 +9,11 @@ const StoreContextProvider = (props) => {
 
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
+  const [list, setList] = useState([]);
+  const [info, setInfo] = useState([]);
 
   const [food_list, setFood_list] = useState([]);
 
-  const [food_categories, setFood_categories] = useState(["yam"]);
 
   const addToCart = (itemId) => {
     if (!cartItems[itemId]) {
@@ -37,25 +38,91 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
+  const fetchList = async () => {
+    const response = await axios.get(`${url}/api/food/list`);
+    console.log(response.data);
+
+    if (response.data.success === true) {
+      setList(response.data.data);
+    } else {
+      toast.error("Error");
+    }
+  };
+
+  const removeFood = async (foodId) => {
+    const response = await axios.delete(`${url}/api/food/${foodId}`);
+    await fetchList();
+    console.log(response.data);
+    if (response.data) {
+      toast.success("response.data.message");
+    } else {
+      toast.error("Error");
+    }
+  };
+  // useEffect(() => {
+  //   fetchList();
+  // }, []);
+
+  const fetchInfo = async () => {
+    console.log("in resPage");
+
+    const response = await axios.get(`${url}`);
+    console.log(response);
+
+    if (response.data.success === true) {
+      setInfo(response.data.data);
+    } else {
+      toast.error("Error");
+    }
+  };
+
+  // useEffect(() => {
+  //   fetchInfo();
+  // }, []);
+
   // const fetchFoodList = async () => {
   //   const response = await axios.get(url + "/api/food/list");
   //   setFood_list(response.data.data);
   // };
 
-  // const fetchCategories = async () => {
-  //   const response = await axios.get(url + "/api/foodCategory/list");
-  //   console.log(response);
-  //   setFood_categories(response.data.data);
-  // };
+
+
+  const loadCartData = async (token) => {
+    console.log(token);
+    const response = await axios.post(
+      url,
+      {},
+
+      { headers: { token } },
+    );
+    console.log("here to response");
+    console.log(response);
+    setCartItems(response.data.cartData);
+  };
+
+
 
   // useEffect(() => {
-  //   (fetchFoodList(), fetchCategories());
+  //   async function loadData() {
+  //     await fetchFoodList();
+  //     if (localStorage.getItem("token")) {
+  //       setToken(localStorage.getItem("token"));
+  //       await loadCartData(localStorage.getItem("token"));
+  //     }
+  //   }
+
+  //   loadData();
   // }, []);
 
   const contextValue = {
+    list,
+    setList,
+    info,
+    setInfo,
+    removeFood,
     food_list,
-    food_categories,
     url,
+    token,
     setToken,
     cartItems,
     setCartItems,
