@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required"],
       minilength: [6, "Password must be at least 6 character long"],
     },
-    userId: {
+    restaurantId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Restaurant",
     },

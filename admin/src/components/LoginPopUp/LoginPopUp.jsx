@@ -44,7 +44,6 @@ const LoginPopUp = ({ setShowLogin }) => {
     if (response.data.message === "Registered successful") {
       console.log("in Register here");
       console.log(response.data.token)
-      setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
       axios.defaults.headers.common["Authorization"] =
         `Bearer ${response.data.token}`;
@@ -54,7 +53,6 @@ const LoginPopUp = ({ setShowLogin }) => {
     if (response.data.message === "Login successful") {
       console.log("in here");
       console.log(response.data.token);
-      setToken(response.data.token);
       console.log("end");
       localStorage.setItem("token", response.data.token);
       axios.defaults.headers.common["Authorization"] =

@@ -76,11 +76,11 @@ const getRestaurant = async (req, res) => {
     console.log(req);
     // console.log(req);
     const { id } = req.params;
-    const restaurant = await Restaurant.find({ id });
-    res.status(200).json(restaurant);
+    const restaurant = await Restaurant.find({ userId: id });
+    res.status(200).json({ success: true, data: restaurant });
   } catch (error) {
     console.error("Error fetching restaurants:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error" });
   }
 };
 

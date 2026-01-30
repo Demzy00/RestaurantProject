@@ -1,18 +1,30 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./AddCategory.css";
 import { assets } from "../../assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { StoreContext } from "../../context/StoreContext";
 
 const AddCategory = ({ url }) => {
   const { id } = useParams();
   console.log(id);
+  const {category, setCategory} = useContext(StoreContext)
 
   const [name, setName] = useState("");
 
-  const [category, setCategory] = useState([]);
+  const fetchCategory = async () => {
+    const response = await axios.get(url + `/api/category/${id}`);
+    console.log(response);
+    if (response.data.success === true) {
+      setCategory(response.data.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategory();
+  }, [id]);
 
   const onClick = async (e) => {
     e.preventDefault();
@@ -32,18 +44,6 @@ const AddCategory = ({ url }) => {
 
     // setName("");
   };
-
-  const fetchCategory = async () => {
-    const response = await axios.get(url + `/api/category/${id}`);
-    console.log(response);
-    if (response.data.success === true) {
-      setCategory(response.data.data);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategory();
-  }, [id]);
 
   // const onSubmitHandler = async (event) => {
   //   event.preventDefault();
@@ -84,7 +84,7 @@ const AddCategory = ({ url }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             type="text"
-            placeholder="Category (Rice, Noodles, Fast Food etc.)"
+            placeholder="Category (Rice, Drink, Fast Food etc.)"
             required
           />{" "}
           <button>Add</button>

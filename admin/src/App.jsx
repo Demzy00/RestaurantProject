@@ -28,7 +28,7 @@ const App = () => {
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/profile" element={<ResPage />} />
+          <Route path="/profile" element={<ResPage url={url} />} />
           <Route
             path="/register-restaurant"
             element={<ResRegister url={url} />}

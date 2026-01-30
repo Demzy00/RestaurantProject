@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Add.css";
 import { assets } from "../../assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { StoreContext } from "../../context/StoreContext";
 
 const Add = ({ url }) => {
+  const { category } = useContext(StoreContext);
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
     name: "",
@@ -36,7 +38,7 @@ const Add = ({ url }) => {
         name: "",
         description: "",
         price: "",
-        category: "Rice",
+        category: "",
       });
       setImage(false);
       toast.success(response.data.message);
@@ -93,14 +95,24 @@ const Add = ({ url }) => {
         </div>
         <div className="add-category-price flex-col">
           <div className="add-category flex-col">
-            <p>Product category</p>
+            <p>Product category (Please add category first) </p>
             <select onChange={onChangeHandler} name="category">
+              {category.map((item, index) => {
+                return (
+                  <option key={index} value={item._id}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </select>
+
+            {/* <select onChange={onChangeHandler} name="category">
               <option value="Rice">Rice</option>
               <option value="Stew">Stew</option>
               <option value="Cake">Cake</option>
               <option value="Pasta">Pasta</option>
               <option value="Noodle">Noodle</option>
-            </select>
+            </select> */}
           </div>
           <div className="add-price flex-col">
             <p>Product price</p>
@@ -120,7 +132,7 @@ const Add = ({ url }) => {
       <br />
       <br />
       <br />
-      <button >Save changes</button>
+      <button>Save changes</button>
     </div>
   );
 };

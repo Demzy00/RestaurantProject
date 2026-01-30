@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 const restaurantSchema = new mongoose.Schema(
   {
+  
     name: {
       type: String,
       required: [true, "Restaurant name is required"],
@@ -19,13 +20,11 @@ const restaurantSchema = new mongoose.Schema(
     // image: {
     //   type: String,
     // },
-    category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-
-    food: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Food",
+      ref: "User",
     },
+
   },
   { timestamps: true },
 );

@@ -1,9 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
+  const { id } = useParams();
   const url = "http://localhost:5050";
   const fronetendUrl = "http://localhost:5174";
 
@@ -11,9 +13,9 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [list, setList] = useState([]);
   const [info, setInfo] = useState([]);
+  const [category, setCategory] = useState([]);
 
   const [food_list, setFood_list] = useState([]);
-
 
   const addToCart = (itemId) => {
     if (!cartItems[itemId]) {
@@ -39,7 +41,7 @@ const StoreContextProvider = (props) => {
   };
 
   const fetchList = async () => {
-    const response = await axios.get(`${url}/api/food/list`);
+    const response = await axios.get(`${url}/api/food/${id}`);
     console.log(response.data);
 
     if (response.data.success === true) {
@@ -50,7 +52,7 @@ const StoreContextProvider = (props) => {
   };
 
   const removeFood = async (foodId) => {
-    const response = await axios.delete(`${url}/api/food/${foodId}`);
+    const response = await axios.delete(`${url}/api/food/${id}`);
     await fetchList();
     console.log(response.data);
     if (response.data) {
@@ -59,9 +61,9 @@ const StoreContextProvider = (props) => {
       toast.error("Error");
     }
   };
-  // useEffect(() => {
-  //   fetchList();
-  // }, []);
+  useEffect(() => {
+    fetchList();
+  }, [id]);
 
   const fetchInfo = async () => {
     console.log("in resPage");
@@ -85,8 +87,6 @@ const StoreContextProvider = (props) => {
   //   setFood_list(response.data.data);
   // };
 
-
-
   const loadCartData = async (token) => {
     console.log(token);
     const response = await axios.post(
@@ -99,8 +99,6 @@ const StoreContextProvider = (props) => {
     console.log(response);
     setCartItems(response.data.cartData);
   };
-
-
 
   // useEffect(() => {
   //   async function loadData() {
@@ -117,6 +115,8 @@ const StoreContextProvider = (props) => {
   const contextValue = {
     list,
     setList,
+    category,
+    setCategory,
     info,
     setInfo,
     removeFood,

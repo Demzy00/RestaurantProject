@@ -18,7 +18,7 @@ const authMiddleware = async (req, res, next) => {
 
     console.log(`token decode id : ${token_decode._id}`);
 
-    req.params.id = token_decode._id;
+    req.params.id = token_decode._id || token_decode.id;
 
     console.log(req.params.id);
 

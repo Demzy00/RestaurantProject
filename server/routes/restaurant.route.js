@@ -22,8 +22,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // routes
-restaurantRouter.post("/add",authMiddleware, addRestaurant);
-restaurantRouter.get("/get", getRestaurant);
+restaurantRouter.post("/:id", authMiddleware, addRestaurant);
+restaurantRouter.get("/:id", authMiddleware, getRestaurant);
 restaurantRouter.patch("/:id", authMiddleware, updateRestaurant);
 restaurantRouter.delete("/:id", authMiddleware, deleteRestaurant);
 
