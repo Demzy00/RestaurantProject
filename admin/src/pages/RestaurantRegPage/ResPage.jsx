@@ -1,41 +1,21 @@
-import { useNavigate, useParams } from "react-router-dom";
-import React, { use, useContext } from "react";
-import { assets } from "../../assets/assets";
-import axios from "axios";
+import React, { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import "./ResPage.css";
-import { useState } from "react";
-import { useEffect } from "react";
 import { StoreContext } from "../../context/StoreContext";
 
-const ResPage = () => {
-  const url = "http://localhost:5050/api/restaurant";
+const ResPage = (req, res) => {
+  // const { id } = useParams();
+  const { info, getInfo } = useContext(StoreContext);
+  console.log(info)
 
-  const { id } = useParams();
-
-  const navigate = useNavigate();
-  const [info, setInfo] = useState([
-    {
-      name: "",
-      address: "",
-      phone: "",
-    },
-  ]);
-  const [image, setImage] = useState(false);
-
-  const getInfo = async () => {
-    const response = await axios.get(`${url}/${id}`);
-    console.log(response);
-    console.log(response.data.success);
-    if (response.data.success === true) {
-      setInfo(response.data.data);
-    }
-  };
-
-  useEffect(() => {
-    getInfo();
-  }, [id]);
-  console.log(info);
+  // useEffect(() => {
+  //   {
+  //     getInfo();
+  //   }
+  // });
+  // console.log(info);
+  // console.log(req.userId);
 
   return (
     <div className="add">
@@ -43,9 +23,9 @@ const ResPage = () => {
         <h2> Restaurant Information</h2>
       </div>
 
-      {info.map((info) => {
+      {info.map((info, index) => {
         return (
-          <div key={info._id}>
+          <div key={index}>
             <div className="add-name-input flex-col">
               <hr />
               <br />

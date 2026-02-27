@@ -5,11 +5,8 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const url = "http://localhost:5050";
-
   const [cartItems, setCartItems] = useState({});
-
   const [food_list, setFood_list] = useState([]);
-
   const [food_categories, setFood_categories] = useState(["yam"]);
 
   const addToCart = (itemId) => {
@@ -47,7 +44,7 @@ const StoreContextProvider = (props) => {
   };
 
   useEffect(() => {
-    fetchFoodList(), fetchCategories();
+    (fetchFoodList(), fetchCategories());
   }, []);
 
   const contextValue = {

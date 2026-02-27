@@ -1,20 +1,20 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const { id } = useParams();
   const url = "http://localhost:5050";
   const fronetendUrl = "http://localhost:5174";
 
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [list, setList] = useState([]);
-  const [info, setInfo] = useState([]);
+  const [info, setInfo] = useState([
+    { id: 1, name: "", address: "", phone: "" },
+  ]);
+  // const [info, setInfo] = useState([]);
   const [category, setCategory] = useState([]);
-
   const [food_list, setFood_list] = useState([]);
 
   const addToCart = (itemId) => {
@@ -40,19 +40,8 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
-  const fetchList = async () => {
-    const response = await axios.get(`${url}/api/food/${id}`);
-    console.log(response.data);
-
-    if (response.data.success === true) {
-      setList(response.data.data);
-    } else {
-      toast.error("Error");
-    }
-  };
-
   const removeFood = async (foodId) => {
-    const response = await axios.delete(`${url}/api/food/${id}`);
+    const response = await axios.delete(`${url}/api/food/${foodId}`);
     await fetchList();
     console.log(response.data);
     if (response.data) {
@@ -61,26 +50,6 @@ const StoreContextProvider = (props) => {
       toast.error("Error");
     }
   };
-  useEffect(() => {
-    fetchList();
-  }, [id]);
-
-  const fetchInfo = async () => {
-    console.log("in resPage");
-
-    const response = await axios.get(`${url}`);
-    console.log(response);
-
-    if (response.data.success === true) {
-      setInfo(response.data.data);
-    } else {
-      toast.error("Error");
-    }
-  };
-
-  // useEffect(() => {
-  //   fetchInfo();
-  // }, []);
 
   // const fetchFoodList = async () => {
   //   const response = await axios.get(url + "/api/food/list");
@@ -100,17 +69,61 @@ const StoreContextProvider = (props) => {
     setCartItems(response.data.cartData);
   };
 
-  // useEffect(() => {
-  //   async function loadData() {
-  //     await fetchFoodList();
-  //     if (localStorage.getItem("token")) {
-  //       setToken(localStorage.getItem("token"));
-  //       await loadCartData(localStorage.getItem("token"));
-  //     }
-  //   }
+  useEffect(() => {
+    async function loadData() {
+      await fetchFoodList();
+      if (localStorage.getItem("token")) {
+        setToken(localStorage.getItem("token"));
+        await loadCartData(localStorage.getItem("token"));
+      }
+    }
 
-  //   loadData();
-  // }, []);
+    loadData();
+  }, []);
+
+  // ADMIN SECTION
+
+  // This is for ResPage
+  const getInfo = async (id) => {
+    console.log("gotten here in funct");
+    if (!id) return console.log("no token found");
+    const response = await axios.get(`${url}/api/restaurant/${id}`);
+    console.log(response);
+    console.log(response.data.success);
+    if (response.data.success === true) {
+      setInfo(response.data.data);
+    }
+  };
+
+  useEffect(() => {
+    // const id = localStorage.getItem("restaurantId");
+
+    getInfo();
+  }, [info]);
+
+  // For Category page
+  const fetchCategory = async (id) => {
+    if (!id) return;
+    const response = await axios.get(url + `/api/category/${id}`);
+    console.log(response);
+    if (response.data.success === true) {
+      setCategory(response.data.data);
+    }
+  };
+
+  // For List page
+  const fetchList = async (id) => {
+    console.log("list lsity");
+    if (!id) return;
+    const response = await axios.get(`${url}/api/food/${id}`);
+    console.log(response.data);
+
+    if (response.data.success === true) {
+      setList(response.data.data);
+    } else {
+      toast.error("Error");
+    }
+  };
 
   const contextValue = {
     list,
@@ -119,6 +132,9 @@ const StoreContextProvider = (props) => {
     setCategory,
     info,
     setInfo,
+    getInfo,
+    fetchCategory,
+    fetchList,
     removeFood,
     food_list,
     url,

@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const addCategory = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.userId;
 
     const { name } = req.body;
 
@@ -37,7 +37,7 @@ const addCategory = async (req, res) => {
 
 const listCategory = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.userId;
     const category = await Category.find({ userId: id });
     res.status(200).json({ success: true, data: category });
   } catch (error) {
@@ -48,7 +48,7 @@ const listCategory = async (req, res) => {
 
 const deleteCategory = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.userId;
     console.log("and here");
     const deletedCategory = await Category.findByIdAndDelete({ userId: id });
     console.log("haha");

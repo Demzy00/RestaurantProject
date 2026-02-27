@@ -3,46 +3,41 @@ import "./AddCategory.css";
 import { assets } from "../../assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 
 const AddCategory = ({ url }) => {
-  const { id } = useParams();
-  console.log(id);
-  const {category, setCategory} = useContext(StoreContext)
-
   const [name, setName] = useState("");
 
-  const fetchCategory = async () => {
-    const response = await axios.get(url + `/api/category/${id}`);
-    console.log(response);
-    if (response.data.success === true) {
-      setCategory(response.data.data);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategory();
-  }, [id]);
+  const { category, setCategory, token } = useContext(StoreContext);
 
   const onClick = async (e) => {
     e.preventDefault();
-
-    // const response = await axios.post(`${url}/api/food/add`, formData);
-
-    const response = await axios.post(`${url}/api/category/${id}`, {
-      name: name,
-    });
-
-    console.log(response);
-    if (response.data.success === true) {
-      setName("");
-    } else {
-      toast.error("Error");
+    
+    if (!token) {
+      toast.error("Please login first");
+      return;
     }
 
-    // setName("");
+    try {
+      const response = await axios.post(`${url}/api/category`, {
+        name: name,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      console.log(response);
+      if (response.data.success === true) {
+        setName("");
+        toast.success("Category added successfully");
+      } else {
+        toast.error("Error");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to add category");
+    }
   };
 
   // const onSubmitHandler = async (event) => {

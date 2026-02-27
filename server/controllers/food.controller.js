@@ -12,7 +12,7 @@ const addFood = async (req, res) => {
     //   return res.status(404).json({ error: "User not found" });
     // }
 
-    const { id } = req.params;
+    const { id } = req.userId;
 
     const { name, description, price, category } = req.body;
     console.log(req.body);
@@ -52,7 +52,7 @@ const addFood = async (req, res) => {
 
 const listFood = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.userId;
     const foods = await Food.find({ userId: id });
     res.status(200).json({ success: true, data: foods });
   } catch (error) {
@@ -63,7 +63,7 @@ const listFood = async (req, res) => {
 
 const getFoodById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.userId;
     const food = await Food.findById(id);
     return res.status(200).json({ success: true, data: food });
   } catch (error) {
@@ -74,7 +74,7 @@ const getFoodById = async (req, res) => {
 
 const updateFood = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.userId;
     const updatedFood = await Food.findByIdAndUpdate({ userId: id }, req.body, {
       new: true,
       runValidators: true,
@@ -91,7 +91,7 @@ const updateFood = async (req, res) => {
 
 const deleteFood = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.userId;
     const food = await Food.findById({ userId: id });
     console.log("got here");
     console.log(food);

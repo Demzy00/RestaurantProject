@@ -8,12 +8,14 @@ import { StoreContext } from "../../context/StoreContext";
 const Add = ({ url }) => {
   const { category } = useContext(StoreContext);
   const [image, setImage] = useState(false);
-  const [data, setData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    category: "",
-  });
+  const [data, setData] = useState([
+    {
+      name: "",
+      description: "",
+      price: "",
+      category: "",
+    },
+  ]);
 
   const onChangeHandler = (event) => {
     const name = event.target.name;

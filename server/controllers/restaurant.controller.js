@@ -43,7 +43,9 @@ import fs from "fs";
 const addRestaurant = async (req, res) => {
   try {
     console.log("in restaurant");
-    const { id } = req.params;
+    console.log(req.userId);
+    const { id } = req.userId;
+    console.log(id);
     const { name, address, number } = req.body;
     console.log(req.body);
 
@@ -73,9 +75,9 @@ const addRestaurant = async (req, res) => {
 const getRestaurant = async (req, res) => {
   try {
     console.log("in get controller");
-    console.log(req);
+    console.log(req.userId);
     // console.log(req);
-    const { id } = req.params;
+    const { id } = req.userId;
     const restaurant = await Restaurant.find({ userId: id });
     res.status(200).json({ success: true, data: restaurant });
   } catch (error) {
@@ -86,7 +88,7 @@ const getRestaurant = async (req, res) => {
 
 const updateRestaurant = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.userId;
     const updatedRestaurant = await Restaurant.findByIdAndUpdate(id, req.body, {
       new: true,
       runValidators: true,
@@ -103,7 +105,7 @@ const updateRestaurant = async (req, res) => {
 
 const deleteRestaurant = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.userId;
     const restaurant = await Restaurant.findById({ id });
     console.log("got here");
     console.log(restaurant);
